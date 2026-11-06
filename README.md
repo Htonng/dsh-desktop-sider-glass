@@ -1,17 +1,50 @@
-# dsh-desktop-sider-glass
+<div align="center">
 
-给 **DeepSeek Harness** 桌面端做的毛玻璃皮肤：侧栏和顶部标题栏共用同一层着色，透明度、色值完全一致，深色 / 浅色各一套。
+<img src="icon.svg" width="96" height="96" alt="dsh-desktop-sider-glass" />
 
-![dsh-desktop-sider-glass](icon.svg)
+<h1>dsh-desktop-sider-glass</h1>
+
+<p>DeepSeek Harness 桌面端的毛玻璃皮肤<br />侧栏与顶部标题栏共用同一层玻璃：透明度一致、深浅色统一</p>
+
+<p>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg" alt="license" /></a>
+  <a href="https://github.com/topics/dsh-plugins"><img src="https://img.shields.io/badge/DSH-plugin-6e40c9.svg" alt="DSH plugin" /></a>
+  <a href="https://github.com/topics/dsh-plugins"><img src="https://img.shields.io/badge/topic-dsh--plugins-blue.svg" alt="topic" /></a>
+  <img src="https://img.shields.io/badge/DSH%20Desktop-0.2.2--rc.1-informational.svg" alt="DSH Desktop" />
+  <a href="https://github.com/Htonng/dsh-desktop-sider-glass/stargazers"><img src="https://img.shields.io/github/stars/Htonng/dsh-desktop-sider-glass?style=flat&amp;label=stars" alt="stars" /></a>
+</p>
+
+<p>
+  <a href="#让-agent-帮你安装">安装提示词</a> ·
+  <a href="#效果对比">效果对比</a> ·
+  <a href="#安装">安装</a> ·
+  <a href="#支持的-dsh-版本">支持版本</a> ·
+  <a href="LICENSE">开源协议</a>
+</p>
+
+</div>
+
+---
+
+## 让 Agent 帮你安装
+
+把下面这段直接发给你的 DSH Agent，让它替你装好并验证：
+
+```text
+请把 https://github.com/Htonng/dsh-desktop-sider-glass 安装到当前 DSH profile：
+1. clone 到当前工作区；
+2. 作为 bundle 安装（plugin_manager 的 install_bundle，target 指向 clone 出来的目录）；
+3. 确认插件行已启用，然后截图确认侧栏和顶栏都变成毛玻璃，深色 / 浅色都正常。
+```
 
 ## 效果对比
 
 | 之前 | 之后 |
-| --- | --- |
+| :---: | :---: |
 | ![before](assets/before.png) | ![after](assets/after.png) |
 
-- 之前：侧栏和标题栏是两块不透明的纯色，与内容区同色。
-- 之后：侧栏 + 标题栏是一整块玻璃，能透过它看到窗口后面的桌面（Windows 11 acrylic），右上角窗口按钮区域也不再出现二次叠色。
+- **之前**：侧栏和标题栏是两块不透明的纯色，与内容区同色。
+- **之后**：侧栏 + 标题栏是一整块玻璃，能透过它看到窗口后面的桌面（Windows 11 acrylic）；右上角窗口按钮区域也不再出现二次叠色。
 
 ## 特性
 
@@ -70,12 +103,12 @@ window.webContents.on("did-finish-load", () => {
 `client.js` 顶部：
 
 ```css
---glass-fill: rgba(14, 15, 20, .75);   /* 深色：调整颜色与透明度 */
+--glass-fill: rgba(14, 15, 20, .75);    /* 深色：调整颜色与透明度 */
 --glass-fill: rgba(250, 251, 253, .75); /* 浅色 */
 ```
 
 保存后热更新生效。
 
-## 协议
+## 开源协议
 
 [GPL-3.0](LICENSE)
