@@ -10,7 +10,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-blue.svg" alt="license" /></a>
   <a href="https://github.com/topics/dsh-plugins"><img src="https://img.shields.io/badge/DSH-plugin-6e40c9.svg" alt="DSH plugin" /></a>
   <a href="https://github.com/topics/dsh-plugins"><img src="https://img.shields.io/badge/topic-dsh--plugins-blue.svg" alt="topic" /></a>
-  <img src="https://img.shields.io/badge/DSH%20Desktop-0.2.2--rc.1-informational.svg" alt="DSH Desktop" />
+  <img src="https://img.shields.io/badge/DSH%20Desktop-0.2.2--rc.5-informational.svg" alt="DSH Desktop" />
   <a href="https://github.com/Htonng/dsh-desktop-sider-glass/stargazers"><img src="https://img.shields.io/github/stars/Htonng/dsh-desktop-sider-glass?style=flat&amp;label=stars" alt="stars" /></a>
 </p>
 
@@ -73,7 +73,7 @@
 
 ## 支持的 DSH 版本
 
-- 实测：**DSH Desktop 0.2.2-rc.1**（Electron 44.7.0，Windows 11 build 26300）。
+- 实测：**DSH Desktop 0.2.2-rc.5**（Electron 44.7.0）；0.2.2-rc.1 同样可用。
 - 需要 DSH 的 Client 插件接口（`dsh.client`）以及布局包的类名后缀（`_frame`、`_sidebarCol`）。升级 DSH 后如果类名后缀变化，需要同步修改 `client.js` 里的选择器。
 - Web 版可用：没有桌面壳补丁时自动回退到内置的环境光背景玻璃，不采样桌面。
 
