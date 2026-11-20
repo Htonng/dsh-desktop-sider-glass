@@ -95,6 +95,14 @@ window.webContents.on("did-finish-load", () => {
 });
 ```
 
+> 0.2.2-rc.5 起，壳在 `enterWorkspace()` 里导航完成后还会把窗口背景设回不透明色，需要一并改掉，否则 acrylic 会被覆盖：
+>
+> ```js
+> if (process.platform === "win32") window.setBackgroundColor("#00000000");
+> ```
+
+标记建议写在 preload 的 `syncWindowsAppearance().mark()` 里（每次文档加载都会执行），比在 `did-finish-load` 里执行脚本更稳。
+
 没有这个补丁时插件会停在默认的环境光玻璃分支，功能正常，只是不透明桌面。
 改壳有风险（升级会被覆盖），请先备份 `app.asar`。
 
