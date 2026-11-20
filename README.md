@@ -79,32 +79,32 @@
 
 ## 桌面采样（可选，需要改桌面壳）
 
-页面里的 `backdrop-filter` 只能模糊窗口内部已经绘制的内容，桌面在窗口合成面之下。要让玻璃真正采样桌面，需要桌面壳在创建主窗口时使用透明背景 + 系统 acrylic：
+页面里的 `backdrop-filter` 只能模糊窗口内部已经绘制的内容，桌面在窗口合成面之下。要让玻璃真正采样桌面，需要桌面壳把主窗口设为透明 + 系统 acrylic。仓库里带了脚本：
 
-```js
-// resources/app.asar 内 lib/main.js 的 createWindow，win32 && primary 分支
-backgroundColor: "#00000000",
-backgroundMaterial: "acrylic",
+```bash
+# 先完全退出 DeepSeek Harness
+node shell/patch-asar.mjs "D:\deepseek-harness"
+# 然后重新启动应用
 ```
 
-并在页面加载完成后打一个标记，插件据此切换到 acrylic 分支：
+还原：
 
-```js
-window.webContents.on("did-finish-load", () => {
-  window.webContents.executeJavaScript("document.documentElement.dataset.windowMaterial='acrylic'");
-});
+```bash
+node shell/patch-asar.mjs "D:\deepseek-harness" --restore
 ```
 
-> 0.2.2-rc.5 起，壳在 `enterWorkspace()` 里导航完成后还会把窗口背景设回不透明色，需要一并改掉，否则 acrylic 会被覆盖：
->
-> ```js
-> if (process.platform === "win32") window.setBackgroundColor("#00000000");
-> ```
+脚本会先把 `resources/app.asar` 备份成 `app.asar.bak`，再用**同长度原位写入**改两个文件，重复执行会提示 `already patched`；遇到不认识的版本会直接报错而不是乱改。
 
-标记建议写在 preload 的 `syncWindowsAppearance().mark()` 里（每次文档加载都会执行），比在 `did-finish-load` 里执行脚本更稳。
+它具体改了什么（Windows）：
+
+- `lib/main.js` · `createWindow()`：`backgroundColor: "#00000000"` + `backgroundMaterial: "acrylic"`
+- `lib/main.js` · `enterWorkspace()`：导航完成后的 `setBackgroundColor(chromeFallbackFill())` 改成 `#00000000`（0.2.2-rc.5 新加的，不改会把透明覆盖回去）
+- `lib/main.js` · `updateBackground()`：主题切换回调同样保持 `#00000000`
+- `lib/preload-app.cjs` · `syncWindowsAppearance().mark()`：写入 `data-window-material="acrylic"`，插件据此切到 acrylic 分支
 
 没有这个补丁时插件会停在默认的环境光玻璃分支，功能正常，只是不透明桌面。
-改壳有风险（升级会被覆盖），请先备份 `app.asar`。
+
+> 改壳有风险，且每次应用更新都会覆盖回去，需要重新执行一次脚本。
 
 ## 调整
 
